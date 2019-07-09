@@ -1,9 +1,10 @@
-puts "Введите Ваше Имя "
-name=gets.chomp
-puts "Введите Ваш рост, в сантиметрах"
-growth=gets.to_i
-weight=growth-110
-if 0 <= weight
-puts "Ваш идеальный вес, #{name}, это #{weight} кг."
-else puts "Ваш вес уже идеален"
-  end
+  puts "Введите Ваше Имя "
+  name = gets.chomp
+  puts "Введите Ваш рост, в сантиметрах"
+  growth = gets.to_i
+  optimal_weight = growth - 110
+if optimal_weight < 0
+  puts "Ваш вес уже идеален"
+else
+	puts "Ваш идеальный вес, #{name}, это #{optimal_weight} кг."
+end

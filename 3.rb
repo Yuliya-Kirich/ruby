@@ -1,24 +1,19 @@
-print "Введите длинну основания треугольника: "
-a = gets.to_i
-print "Введите высоту треугольника: "
-h = gets.to_i
-p = 0.50*a*h
-area=p.to_f
-print "Введите длинну двух других сторон треугольника, по порядку, где 1 сторона = "
-b = gets.to_i
-print "2 сторона = "
-c = gets.to_i
-
-if (a!=0&&b!=0&&c!=0) == false
+  print "Введите длинну трех сторон треугольника, по порядку, где 1 сторона = "
+  b_side = gets.to_f
+  print "2 сторона = "
+  c_side = gets.to_f
+  print "3 сторона = "
+  a_side = gets.to_f
+  a_side, b_side, c_side = [a_side,b_side,c_side].sort!
+if [a_side, b_side, c_side].any? {|length| length == 0}
   puts "Это не треугольник"
-elsif a==b&&b==c&&a==c
-  puts "Равносторонний треугольник. Площадь треугольника = #{area}"
-
-elsif a==b||b==c||c==a
-  puts "Равнобедренный треугольник. Площадь треугольника = #{area}"
- elsif a*a+b*b==c*c
-  puts "Прямоугольный треугольник. Площадь треугольника = #{area}"
+elsif a_side == b_side && b_side == c_side && b_side == c_side
+  puts "Это равносторонний треугольник"
+elsif a_side == b_side || b_side == c_side || c_side == b_side
+  puts "Это равнобедренный треугольник"
+elsif a_side**2 + b_side**2 == c_side**2
+  puts "Это прямоугольный треугольник"
 else
-  puts "Треугольник не равносторонний, не равнобедренный, и не прямоугольный. Площадь треугольника = #{area}"
+  puts "Этот треугольник не равносторонний, не равнобедренный, и не прямоугольный"
   end
 
