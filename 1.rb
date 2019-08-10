@@ -6,5 +6,5 @@
 if optimal_weight < 0
   puts "Ваш вес уже идеален"
 else
-	puts "Ваш идеальный вес, #{name}, это #{optimal_weight} кг."
+  puts "Ваш идеальный вес, #{name}, это #{optimal_weight} кг."
 end
