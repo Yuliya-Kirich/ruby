@@ -5,7 +5,7 @@
 my_array = []
 fibonacci = 1
 loop do
-  my_array += [fibonacci]
+  my_array << fibonacci
   fibonacci += fibonacci
   break if fibonacci >= 100
 end
