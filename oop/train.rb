@@ -14,7 +14,7 @@
 # Возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 
 class Train
-  attr_accessor :speed, :number_of_cars, :current_station, :previous_station, :next_station
+  attr_accessor :speed, :number_of_cars
   attr_reader :route, :type, :number
 
   def initialize(number, type, number_of_cars)
@@ -22,68 +22,87 @@ class Train
     @type = type
     @number_of_cars = number_of_cars
     @speed = 0
-    @way = []
-    @current_station = 'no'
-    @previous_station = 'no'
-    @next_station = 'no'
+    @route = 'не назначен'
+    @current_station = nil
   end
 
   def up_speed(increase_speed)
     @speed += increase_speed
   end
 
-  def show_speed
-    puts @speed
-  end
-
   def slow_down(lower_speed)
-    @speed -= lower_speed unless @speed <= 0
+    @speed -= lower_speed
+    @speed = 0 if @speed < 0
   end
 
-  def show_sum_of_cars
-    puts @number_of_cars
+  def add_add_carriage
+    @number_of_cars += 1 if @speed.zero?
   end
 
-  def add_sum_cars
-    @number_of_cars += 1 if @speed <= 0
-  end
-
-  def take_away_cars
-    @number_of_cars -= 1 if (@number_of_cars > 0) & (@speed <= 0)
+  def remove_carriage
+    @number_of_cars -= 1 if (@number_of_cars > 0) && @speed.zero?
   end
 
   def add_route(route)
-    @way = route.station_list
-    @current_station = route.show_station_list[0]
+    @route = route
+    located_at_first_station
+    @current_station = 0
   end
 
-  def transit_station_forward(route)
-    route.station_list.each.with_index(1) do |val, index|
-      unless @current_station != val
-        @current_station = route.show_station_list[index]
-        @previous_station = route.show_station_list[index - 1] if index > 1
-        @next_station = route.show_station_list[index + 1]
-        break
-        # puts "#{val} , #{index}, #{@current_station}"
-      end
-    end
-    puts @current_station
+  def located_at_first_station
+    @route.station_list[0].add_train(self)
   end
 
-  def transit_station_back(route)
-    route.station_list.each.with_index(0) do |val, index|
-      (1..-1).each do |index|
-        next if @current_station != val
+  def current_station
+    @route.station_list[@current_station]
+  end
 
-        @current_station = route.show_station_list[index - 1]
-        break
-        # puts "#{val} , #{index}, #{@current_station}"
-      end
+  def next_station
+    @route.station_list[@current_station + 1]
+  end
+
+  def previous_station
+    if @current_station == 0 || @current_station == nil?
+      # puts 'Нет предыдущей станции'
+    else @route.station_list[@current_station - 1]
     end
-    puts @current_station
+  end
+
+  def go_forward
+    if next_station.nil?
+      # puts 'Конечная станция'
+    else
+      @route.station_list[@current_station].delete_train(self)
+      @current_station += 1
+      @route.station_list[@current_station].add_train(self)
+    end
+  end
+
+  def transit_station_back
+    if previous_station.nil?
+      puts 'Конечная станция'
+    else
+      @route.station_list[@current_station].delete_train(self)
+      @current_station -= 1
+      @route.station_list[@current_station].add_train(self)
+    end
   end
 
   def show_stations_train
-    puts "current station is #{@current_station}, previous station #{@previous_station}, next_station #{@next_station}"
+    if @current_station.nil?
+      puts 'Нет текущей станции'
+    else
+      puts "Текущая станция: #{@route.station_list[@current_station].name}"
+    end
+    if !previous_station.nil?
+      puts 'Нет предыдущей станции'
+    else
+      puts "Предыдущая станция: #{@route.station_list[@current_station - 1].name}"
+    end
+    if !next_station.nil?
+      puts 'Нет следующей станции'
+    else
+      puts "Следующая станция: #{@route.station_list[@current_station + 1].name}"
+    end
   end
-  end
+end

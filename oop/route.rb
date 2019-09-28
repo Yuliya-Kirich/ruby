@@ -11,20 +11,20 @@ class Route
   attr_accessor :station_list
 
   def initialize(initial_station, end_station)
-   @initial_station = initial_station
-   @end_station = end_station
-   @station_list = [initial_station, end_station]
+    @initial_station = initial_station
+    @end_station = end_station
+    @station_list = [initial_station, end_station]
   end
 
   def add_intermediate_station(intermediate_station)
-  @station_list.insert(1, intermediate_station)
+    @station_list.insert(-2, intermediate_station)
   end
 
   def delete_intermediate_station(intermediate_station)
-  @station_list.delete(intermediate_station)
+    @station_list[1..-2].delete(intermediate_station)
   end
 
   def show_station_list
-  @station_list.each { |station| puts station }
+    @station_list.each { |station| puts station }
   end
 end

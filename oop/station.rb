@@ -8,8 +8,7 @@
 # Может отправлять поезда (по одному за раз, при этом, поезд удаляется из списка поездов, находящихся на станции).
 
 class Station
-  attr_reader :name
-  attr_accessor :trains_at_station
+  attr_reader :name, :trains_at_station
 
   def initialize(name)
     @name = name
@@ -26,15 +25,16 @@ class Station
     end
   end
 
-  def show_type_train
+  def show_type_train(train_type)
     counts = []
-    @trains_at_station.each do |train|
-      counts << train.type
+    counts << @trains_at_station.select do |train|
+      train.type if train.type == train_type
     end
-    puts counts
+
+    puts "Поездов типа: #{counts.size}"
   end
 
-  def delete_tr(train)
+  def delete_train(train)
     @trains_at_station.delete(train)
   end
 end
