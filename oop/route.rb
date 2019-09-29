@@ -25,6 +25,6 @@ class Route
   end
 
   def show_station_list
-    @station_list.each { |station| puts station }
+    @station_list.each { |station| puts station.name }
   end
 end

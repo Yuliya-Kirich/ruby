@@ -26,12 +26,7 @@ class Station
   end
 
   def show_type_train(train_type)
-    counts = []
-    counts << @trains_at_station.select do |train|
-      train.type if train.type == train_type
-    end
-
-    puts "Поездов типа: #{counts.size}"
+    @trains_at_station.select { |train| train.type == train_type }.size
   end
 
   def delete_train(train)
