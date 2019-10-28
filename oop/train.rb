@@ -14,7 +14,7 @@
 # Возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 
 class Train
-  attr_accessor :speed, :number_of_cars
+  attr_accessor :speed, :number_of_cars, :train_carriages
   attr_reader :route, :number
 
   def initialize(number)
@@ -22,6 +22,7 @@ class Train
     @speed = 0
     @route = nil
     @current_station = nil
+    @train_carriages = []
   end
 
   def up_speed(increase_speed)
@@ -41,25 +42,21 @@ class Train
 
   def current_station
     return if route.nil?
-
     @route.station_list[@current_station]
   end
 
   def next_station
     return if route.nil?
-
     @route.station_list[@current_station + 1]
   end
 
   def previous_station
     return if route.nil? || @current_station == 0
-
     @route.station_list[@current_station - 1]
   end
 
   def go_forward
     return if next_station.nil?
-
     current_station.delete_train(self)
     @current_station += 1
     current_station.add_train(self)
@@ -67,17 +64,18 @@ class Train
 
   def transit_station_back
     return if previous_station.nil?
-
     current_station.delete_train(self)
     @current_station -= 1
     current_station.add_train(self)
   end
 
-  def add_carriages(passenger_carriage)
-    passenger_carriage.passenger_train_carriages << 1
+  def add_carriages(carriage)
+    @train_carriages << carriage.new_carriage.itself
   end
 
-  def remove_carriage(passenger_carriage)
-    passenger_carriage.passenger_train_carriages -= [passenger_carriage.itself]
+  def remove_carriage
+    @train_carriages.clear if @train_carriages.length == 1
+    @train_carriages.delete_at(1)
   end
+
 end

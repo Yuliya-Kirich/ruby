@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class PassengerCarriage
-  attr_accessor :passenger_train_carriages
-
+  attr_reader :type
   def initialize
-    @passenger_train_carriages = []
+    @type = 'passenger'
   end
 
+  def new_carriage
+    passenger_carriage = PassengerCarriage.new
+  end
 end

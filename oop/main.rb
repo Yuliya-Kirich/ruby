@@ -30,7 +30,7 @@ class Main
       station_name = gets.chomp
       station = Station.new(station_name)
 
-      puts "Станция \"#{station.name} \" создана"
+      puts "Станция \"#{station.name}\" создана"
 
     elsif user_input == 2
       puts "Если вы хотите создать поезд, типа: 'пассажирский'- нажмите 1; грузовой - 2"
@@ -41,7 +41,7 @@ class Main
 
       if train_type == 1
         passenger_train = PassengerTrain.new(train_number)
-        puts "Пассажирский поезд под номером \"#{passenger_train.number} \"  создан успешно."
+        puts "Пассажирский поезд под номером \"#{passenger_train.number}\" создан успешно."
         passenger_carriage = PassengerCarriage.new
 
       elsif train_type == 2
@@ -50,7 +50,7 @@ class Main
         puts "Грузовой поезд под номером \"#{cargo_train.number} \"  создан успешно."
 
       else
-        puts 'Выбор типа поезда должен быть только из перечня '
+        puts 'Выбор типа поезда должен быть только из перечня'
 
       end
 
@@ -91,8 +91,8 @@ class Main
 
         when 0
           break
+           end
         end
-      end
 
     elsif user_input == 4
 
@@ -103,29 +103,27 @@ class Main
         puts "Путь поезду назначен: текущая станция #{cargo_train.current_station.name} "
         cargo_train.add_route(route)
       else
-        puts "Произошла ошибка"
+        puts 'Произошла ошибка'
       end
 
     elsif user_input == 5
       if train_type == 1
         passenger_train.add_carriages(passenger_carriage)
-        puts "Вагон пассажирскому поезду добавлен #{passenger_carriage.passenger_train_carriages.count} "
+        puts "Вагон пассажирскому поезду добавлен #{passenger_train.train_carriages.count} "
       elsif train_type == 2
         cargo_train.add_carriages(cargo_carriage)
-        puts "Вагон пассажирскому поезду добавлен #{cargo_carriage.cargo_train_carriages.count}"
+        puts "Вагон пассажирскому поезду добавлен #{cargo_train.train_carriages.count}"
       else
         puts 'Нельзя данному типу поезда добавить вагоны'
       end
 
     elsif user_input == 6
       if train_type == 1
-        passenger_carriage.passenger_train_carriages.clear if passenger_carriage.passenger_train_carriages.length == 1
-        passenger_train.remove_carriage(passenger_carriage)
-        puts "Вагоны пассажирскому поезду удалены #{passenger_carriage.passenger_train_carriages.count} "
+        passenger_train.remove_carriage
+        puts "Вагоны пассажирскому поезду удалены #{passenger_train.train_carriages.count} "
       elsif train_type == 2
-        cargo_carriage.cargo_train_carriages.clear if cargo_carriage.cargo_train_carriages.length == 1
-        cargo_train.remove_carriage(cargo_carriage)
-        puts "Вагоны грузовому поезду удалены #{cargo_carriage.cargo_train_carriages.count}"
+        cargo_train.remove_carriage
+        puts "Вагоны грузовому поезду удалены #{cargo_train.train_carriages.count}"
       else
         puts 'Нельзя данному типу поезда удалить вагоны'
       end
