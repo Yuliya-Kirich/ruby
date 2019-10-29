@@ -1,5 +1,5 @@
 class CargoTrain < Train
-  attr_accessor :type
+  attr_reader :type
 
   def initialize(number)
     super(number)

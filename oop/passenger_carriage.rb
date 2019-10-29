@@ -5,8 +5,4 @@ class PassengerCarriage
   def initialize
     @type = 'passenger'
   end
-
-  def new_carriage
-    passenger_carriage = PassengerCarriage.new
-  end
 end

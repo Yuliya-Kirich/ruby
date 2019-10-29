@@ -109,10 +109,10 @@ class Main
     elsif user_input == 5
       if train_type == 1
         passenger_train.add_carriages(passenger_carriage)
-        puts "Вагон пассажирскому поезду добавлен #{passenger_train.train_carriages.count} "
+        puts "Вагон пассажирскому поезду добавлен #{passenger_train.carriages.count} "
       elsif train_type == 2
         cargo_train.add_carriages(cargo_carriage)
-        puts "Вагон пассажирскому поезду добавлен #{cargo_train.train_carriages.count}"
+        puts "Вагон пассажирскому поезду добавлен #{cargo_train.carriages.count}"
       else
         puts 'Нельзя данному типу поезда добавить вагоны'
       end
@@ -120,10 +120,10 @@ class Main
     elsif user_input == 6
       if train_type == 1
         passenger_train.remove_carriage
-        puts "Вагоны пассажирскому поезду удалены #{passenger_train.train_carriages.count} "
+        puts "Вагоны пассажирскому поезду удалены #{passenger_train.carriages.count} "
       elsif train_type == 2
         cargo_train.remove_carriage
-        puts "Вагоны грузовому поезду удалены #{cargo_train.train_carriages.count}"
+        puts "Вагоны грузовому поезду удалены #{cargo_train.carriages.count}"
       else
         puts 'Нельзя данному типу поезда удалить вагоны'
       end

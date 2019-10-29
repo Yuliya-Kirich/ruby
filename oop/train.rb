@@ -14,7 +14,7 @@
 # Возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 
 class Train
-  attr_accessor :speed, :number_of_cars, :train_carriages
+  attr_accessor :speed, :number_of_cars, :carriages
   attr_reader :route, :number
 
   def initialize(number)
@@ -22,7 +22,7 @@ class Train
     @speed = 0
     @route = nil
     @current_station = nil
-    @train_carriages = []
+    @carriages = []
   end
 
   def up_speed(increase_speed)
@@ -70,12 +70,16 @@ class Train
   end
 
   def add_carriages(carriage)
-    @train_carriages << carriage.new_carriage.itself
+  if  @speed.zero?
+    @carriages << carriage
+  else
+  puts 'Дождитесь, когда поезд остановится'
+  end
   end
 
   def remove_carriage
-    @train_carriages.clear if @train_carriages.length == 1
-    @train_carriages.delete_at(1)
+    @carriages.clear if @carriages.length == 1
+    @carriages.delete_at(1)
   end
 
 end
