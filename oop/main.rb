@@ -7,11 +7,14 @@ require_relative 'cargo_carriage.rb'
 require_relative 'cargo_train.rb'
 require_relative 'passenger_carriage.rb'
 require_relative 'passenger_train.rb'
+require_relative 'manufacture_name.rb'
+require_relative 'station_selection.rb'
 
+# noinspection ALL
 class Main
   user_input = nil
   puts 'Привет, это программа-абстракция железной дороги'
-
+---_
   while user_input != 0
     puts 'Введите 1, если вы хотите создать станцию'
     puts 'Введите 2, если вы хотите создать поезд'
@@ -34,6 +37,7 @@ class Main
 
     elsif user_input == 2
       puts "Если вы хотите создать поезд, типа: 'пассажирский'- нажмите 1; грузовой - 2"
+
       train_type = gets.to_i
 
       puts 'Введите номер поезда'
@@ -135,27 +139,24 @@ class Main
         puts 'Если хотите перемещать поезд по маршруту вперед - нажмите 1; назад - нажмите 2; закончить процесс - нажмите 0'
         remove = gets.to_i
 
+        station_selection = StationSelection.new
         case remove
         when 1
           if train_type == 1
-            passenger_train.go_forward
-            puts "текущая станция #{passenger_train.current_station.name}"
+            station_selection.station_selection(passenger_train)
           elsif train_type == 2
-            cargo_train.go_forward
-            puts "текущая станция #{cargo_train.current_station.name}"
+            station_selection.station_selection(cargo_train)
           else 'Произошла ошибка'
             end
         when 2
           if train_type == 1
-            passenger_train.transit_station_back
-            puts "текущая станция #{passenger_train.current_station.name}"
+            station_selection.selection_transit(passenger_train)
           elsif train_type == 2
-            cargo_train.transit_station_back
-            puts "текущая станция #{cargo_train.current_station.name}"
+            station_selection.selection_transit(cargo_train)
           else 'Произошла ошибка'
           end
         end
-        end
+      end
 
     elsif user_input == 8
       remove = nil

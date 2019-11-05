@@ -14,6 +14,8 @@
 # Возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 
 class Train
+  require_relative 'manufacture_name.rb'
+  include ManufactureName
   attr_accessor :speed, :number_of_cars, :carriages
   attr_reader :route, :number
 
@@ -42,21 +44,25 @@ class Train
 
   def current_station
     return if route.nil?
+
     @route.station_list[@current_station]
   end
 
   def next_station
     return if route.nil?
+
     @route.station_list[@current_station + 1]
   end
 
   def previous_station
     return if route.nil? || @current_station == 0
+
     @route.station_list[@current_station - 1]
   end
 
   def go_forward
     return if next_station.nil?
+
     current_station.delete_train(self)
     @current_station += 1
     current_station.add_train(self)
@@ -64,22 +70,22 @@ class Train
 
   def transit_station_back
     return if previous_station.nil?
+
     current_station.delete_train(self)
     @current_station -= 1
     current_station.add_train(self)
   end
 
   def add_carriages(carriage)
-  if  @speed.zero?
-    @carriages << carriage
-  else
-  puts 'Дождитесь, когда поезд остановится'
-  end
+    if @speed.zero?
+      @carriages << carriage
+    else
+      puts 'Дождитесь, когда поезд остановится'
+    end
   end
 
   def remove_carriage
     @carriages.clear if @carriages.length == 1
     @carriages.delete_at(1)
   end
-
 end
