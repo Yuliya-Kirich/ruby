@@ -9,10 +9,18 @@
 
 class Station
   attr_reader :name, :trains_at_station
+  @@all_station = {}
+
+  class << self
+    def all
+      @@all_station
+    end
+  end
 
   def initialize(name)
     @name = name
     @trains_at_station = []
+    @@all_station[name] = self
   end
 
   def add_train(train)
@@ -31,9 +39,5 @@ class Station
 
   def delete_train(train)
     @trains_at_station.delete(train)
-  end
-
-  def all
-    puts @trains_at_station
   end
 end

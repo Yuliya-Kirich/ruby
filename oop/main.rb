@@ -14,7 +14,7 @@ require_relative 'station_selection.rb'
 class Main
   user_input = nil
   puts 'Привет, это программа-абстракция железной дороги'
----_
+
   while user_input != 0
     puts 'Введите 1, если вы хотите создать станцию'
     puts 'Введите 2, если вы хотите создать поезд'
@@ -32,7 +32,11 @@ class Main
       puts 'Введите название станции'
       station_name = gets.chomp
       station = Station.new(station_name)
-
+      #def new(*args)
+      #  print "Создается новый #{self.name}\n"
+      #  oldNew(*args)
+      # end
+      Station.all
       puts "Станция \"#{station.name}\" создана"
 
     elsif user_input == 2
@@ -45,11 +49,14 @@ class Main
 
       if train_type == 1
         passenger_train = PassengerTrain.new(train_number)
+        Train.find(train_number)
         puts "Пассажирский поезд под номером \"#{passenger_train.number}\" создан успешно."
         passenger_carriage = PassengerCarriage.new
 
+
       elsif train_type == 2
         cargo_train = CargoTrain.new(train_number)
+        Train.find(train_number)
         cargo_carriage = CargoCarriage.new
         puts "Грузовой поезд под номером \"#{cargo_train.number} \"  создан успешно."
 

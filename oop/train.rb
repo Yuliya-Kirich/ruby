@@ -18,6 +18,19 @@ class Train
   include ManufactureName
   attr_accessor :speed, :number_of_cars, :carriages
   attr_reader :route, :number
+  @@trains = {}
+
+
+  class<<self
+    attr_accessor :trains
+
+    def find(number)
+      @@trains.each do |v|
+        @@trains[number] if v.include?(number)
+      end
+    end
+
+  end
 
   def initialize(number)
     @number = number
@@ -25,6 +38,7 @@ class Train
     @route = nil
     @current_station = nil
     @carriages = []
+    @@trains[number] = self
   end
 
   def up_speed(increase_speed)
