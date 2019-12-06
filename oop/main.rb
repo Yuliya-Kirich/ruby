@@ -9,6 +9,7 @@ require_relative 'passenger_carriage.rb'
 require_relative 'passenger_train.rb'
 require_relative 'manufacture_name.rb'
 require_relative 'station_selection.rb'
+require_relative 'instance_counter.rb'
 
 # noinspection ALL
 class Main

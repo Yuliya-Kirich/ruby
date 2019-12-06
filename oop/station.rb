@@ -8,6 +8,9 @@
 # Может отправлять поезда (по одному за раз, при этом, поезд удаляется из списка поездов, находящихся на станции).
 
 class Station
+  require_relative 'instance_counter.rb'
+  include InstanceCounter
+
   attr_reader :name, :trains_at_station
   @@all_station = {}
 
@@ -21,6 +24,8 @@ class Station
     @name = name
     @trains_at_station = []
     @@all_station[name] = self
+    self.class.instance_methods
+    self.register_instance
   end
 
   def add_train(train)

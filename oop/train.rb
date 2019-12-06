@@ -15,7 +15,11 @@
 
 class Train
   require_relative 'manufacture_name.rb'
+  require_relative 'instance_counter.rb'
+
   include ManufactureName
+  include InstanceCounter
+
   attr_accessor :speed, :number_of_cars, :carriages
   attr_reader :route, :number
   @@trains = {}
@@ -32,6 +36,7 @@ class Train
 
   end
 
+
   def initialize(number)
     @number = number
     @speed = 0
@@ -39,6 +44,8 @@ class Train
     @current_station = nil
     @carriages = []
     @@trains[number] = self
+  #  self.register_instance
+    self.class.instance_methods
   end
 
   def up_speed(increase_speed)
@@ -58,7 +65,6 @@ class Train
 
   def current_station
     return if route.nil?
-
     @route.station_list[@current_station]
   end
 

@@ -8,12 +8,17 @@
 # Может выводить список всех станций по-порядку от начальной до конечной
 
 class Route
+
+  require_relative 'instance_counter.rb'
+  include InstanceCounter
+
   attr_accessor :station_list
 
   def initialize(initial_station, end_station)
     @initial_station = initial_station
     @end_station = end_station
     @station_list = [initial_station, end_station]
+    self.class.instance_methods
   end
 
   def add_intermediate_station(intermediate_station)
