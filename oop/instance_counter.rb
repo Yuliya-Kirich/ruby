@@ -19,22 +19,25 @@ module InstanceCounter
       @@instances_variable << self
 
       class_instance_count = 0
-      if @@instances_variable[-1].class == CargoTrain || @@instances_variable.at(-1).class == PassengerTrain
+      puts (@@instances_variable.each{ |type_v| type_v.instance_variables})
+      puts @@instances_variable[-1]
+      if (@@instances_variable[-1].each_object == CargoTrain) || (@@instances_variable[-1].each_object == PassengerTrain)
 
         @@instances_variable.each { |type_v| class_instance_count += 1 if type_v.type == self.type}
-        puts class_instance_count
+      # puts class_instance_count
 
       elsif @@instances_variable[-1].class == Route
         @@instances_variable.each { |type_v| class_instance_count += 1 if type_v.end_station}
-        puts class_instance_count
+      # puts class_instance_count
 
       elsif @@instances_variable[-1].class == Station
         @@instances_variable.each { |type_v| class_instance_count += 1 if type_v.name }
 
-        puts class_instance_count
+      # puts class_instance_count
       else
         puts'no'
-       end
+            end
+      puts class_instance_count
     end
   end
 end
