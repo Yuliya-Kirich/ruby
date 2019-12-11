@@ -7,13 +7,10 @@
 # Может удалять промежуточную станцию из списка
 # Может выводить список всех станций по-порядку от начальной до конечной
 
+require_relative 'instance_counter.rb'
 class Route
-
-  require_relative 'instance_counter.rb'
   include InstanceCounter
-
   attr_accessor :station_list
-
   def initialize(initial_station, end_station)
     @initial_station = initial_station
     @end_station = end_station

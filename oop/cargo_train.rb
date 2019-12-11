@@ -1,6 +1,7 @@
-class CargoTrain < Train
+# frozen_string_literal: true
 
-  require_relative 'instance_counter.rb'
+require_relative 'instance_counter.rb'
+class CargoTrain < Train
   include InstanceCounter
 
   attr_reader :type

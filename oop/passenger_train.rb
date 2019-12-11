@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'instance_counter.rb'
 class PassengerTrain < Train
-  require_relative 'instance_counter.rb'
   include InstanceCounter
 
   attr_accessor :type

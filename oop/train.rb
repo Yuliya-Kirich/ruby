@@ -12,11 +12,10 @@
 # При назначении маршрута поезду, поезд автоматически помещается на первую станцию в маршруте.
 # Может перемещаться между станциями, указанными в маршруте. Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # Возвращать предыдущую станцию, текущую, следующую, на основе маршрута
+require_relative 'manufacture_name.rb'
+require_relative 'instance_counter.rb'
 
 class Train
-  require_relative 'manufacture_name.rb'
-  require_relative 'instance_counter.rb'
-
   include ManufactureName
   include InstanceCounter
 
@@ -33,9 +32,7 @@ class Train
         @@trains[number] if v.include?(number)
       end
     end
-
   end
-
 
   def initialize(number)
     @number = number
@@ -44,7 +41,7 @@ class Train
     @current_station = nil
     @carriages = []
     @@trains[number] = self
-  #  self.register_instance
+    @manufacturer_name = 'f'
     self.class.instance_methods
   end
 
@@ -108,4 +105,6 @@ class Train
     @carriages.clear if @carriages.length == 1
     @carriages.delete_at(1)
   end
+
+
 end
