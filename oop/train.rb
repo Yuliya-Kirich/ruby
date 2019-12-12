@@ -28,7 +28,7 @@ class Train
     attr_accessor :trains
 
     def find(number)
-      @@trains.select { |n| puts n == number }
+      @@trains.select { |n| n == number }
     end
   end
 
