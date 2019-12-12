@@ -28,9 +28,7 @@ class Train
     attr_accessor :trains
 
     def find(number)
-      @@trains.each do |v|
-        @@trains[number] if v.include?(number)
-      end
+      @@trains.select { |n| puts n == number }
     end
   end
 
@@ -41,7 +39,6 @@ class Train
     @current_station = nil
     @carriages = []
     @@trains[number] = self
-    @manufacturer_name = 'f'
     self.class.instance_methods
   end
 
