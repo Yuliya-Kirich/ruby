@@ -35,14 +35,14 @@ class Train
 
   def initialize(number)
     @number = number
+    validate!
+    valid?
     @speed = 0
     @route = nil
     @current_station = nil
     @carriages = []
     @@trains[number] = self
     self.class.instance_methods
-    validate!
-    valid?
   end
 
   def up_speed(increase_speed)
