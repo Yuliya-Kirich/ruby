@@ -16,6 +16,7 @@ module Passenger_boarding
         take = gets.chomp.to_i
         case take
         when 1
+          seats -= 1
           take_seats(seats)
         when 0
           break
@@ -27,7 +28,7 @@ module Passenger_boarding
   end
 
   def read_busy_seats(block)
-    @number_of_seats.length - block.call
+    @number_of_seats.length-block.call
   end
 
   def read_empty_seats(block)
@@ -36,12 +37,14 @@ module Passenger_boarding
 
   def take_seats(seats)
     if seats > 0
-      seats -= 1
-      block = Proc.new { seats }
+      #seats -= 1
+      block = Proc.new{ seats }
       puts "Свободно мест в вагоне: #{read_empty_seats(block)}"
       puts "Занято мест в вагоне: #{read_busy_seats(block)}"
     else
       puts 'Все места уже заняты'
     end
   end
+
+
 end
