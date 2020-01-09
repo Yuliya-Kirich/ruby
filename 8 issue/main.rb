@@ -60,9 +60,10 @@ class Main
       elsif train_type == 2
         cargo_train = CargoTrain.new(train_number)
         Train.find(train_number)
-        cargo_carriage = CargoCarriage.new
-        puts "Грузовой поезд под номером \"#{cargo_train.number} \"  создан успешно."
-
+        puts "Грузовой поезд под номером \"#{cargo_train.number}\" создан успешно."
+        puts 'Введите общий объем вагонов'
+        overall_volume = gets.chomp.to_i
+        cargo_carriage = CargoCarriage.new(overall_volume)
       else
         puts 'Выбор типа поезда должен быть только из перечня'
       end
