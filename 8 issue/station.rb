@@ -32,15 +32,46 @@ class Station
     valid?
   end
 
+
   def add_train(train)
     @trains_at_station << train
+    add_train_in_station
+  end
+
+
+
+
+
+  def add_train_in_station
+    puts @@all_station
+    @@all_station.each do |key, station|
+      station.trains_at_station.each do |value|
+       return if value.class == PassengerTrain || value.class == CargoTrain
+
+       value.each { |train|
+         if block_given?
+         yield(train.number, train.type, train.carriages)
+         else
+           puts 'No block'
+         end
+       }
+      end
+      # station.methods.each_pair {| key_value_array | block }
+    end
+  end
+
+
+  add_train_in_station do |number, type, carriages|
+    puts do
+      "Номер поезда - #{number},тип - #{type}, кол-во вагонов - #{carriages}"
+    end
   end
 
   def show_trains
     @trains_at_station.each do |train|
       puts "поезд на станции #{train.number}"
     end
-  end
+   end
 
   def show_type_train(train_type)
     @trains_at_station.select { |train| train.type == train_type }.size

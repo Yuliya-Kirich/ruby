@@ -182,8 +182,9 @@ class Main
 
         when 2
           if train_type == 1
-            puts "Список поездов на станции #{train.current_station.show_trains}"
+            puts "Список поездов на станции #{Train.current_station.show_trains}"
           elsif train_type == 2
+            station.add_train_in_station
           else
             puts 'Произошла ошибка'
           end
