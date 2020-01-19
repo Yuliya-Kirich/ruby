@@ -24,48 +24,65 @@ class Station
 
   def initialize(name)
     @name = name
-    @trains_at_station = []
+    @trains_at_station = {}
     @@all_station[name] = self
     self.class.instance_methods
     self.register_instance
     validate!
     valid?
+
   end
 
 
   def add_train(train)
-    @trains_at_station << train
+    #@trains_at_station << train
+    key = (@trains_at_station.length + 1)
+    @trains_at_station[key] = train
     add_train_in_station
   end
-
-
 
 
 
   def add_train_in_station
     puts @@all_station
     @@all_station.each do |key, station|
-      station.trains_at_station.each do |value|
-       return if value.class == PassengerTrain || value.class == CargoTrain
+      puts "все параметры класса #{station.methods} наименование станции -'#{key}'"
+      puts  "поезда на станции #{station.trains_at_station}"
+      station.trains_at_station.each do |key_number, value|
+        #if value == :trains_at_station
 
-       value.each { |train|
-         if block_given?
-         yield(train.number, train.type, train.carriages)
-         else
-           puts 'No block'
-         end
-       }
+
+
+        #if value.class == PassengerTrain || value.class == CargoTrain
+
+         puts "найден !!! #{value.number}, #{value.type}, #{value.carriages.length}"
+         number = value.number
+         type = value.type
+         carriages = value.carriages.length
+         hj
+
+         yield("#{value.number}", "#{value.type}", "#{value.carriages.length}")
+
+          #end
+          #else
+          #    puts 'не найден метод'
+        #end
+
+     # station.methods.each_pair {| key_value_array | block }
+
+
       end
-      # station.methods.each_pair {| key_value_array | block }
+      end
+  end
+
+  def hj
+    add_train_in_station do |number, type, carriages|
+      puts do
+        "Номер поезда - #{number},тип - #{type}, кол-во вагонов - #{carriages}"
+      end
     end
   end
 
-
-  add_train_in_station do |number, type, carriages|
-    puts do
-      "Номер поезда - #{number},тип - #{type}, кол-во вагонов - #{carriages}"
-    end
-  end
 
   def show_trains
     @trains_at_station.each do |train|

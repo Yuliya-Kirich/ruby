@@ -73,6 +73,7 @@ class Main
       station = Station.new(gets.chomp)
       initial_station = station
 
+
       puts 'Введите конечную станцию'
       station = Station.new(gets.chomp)
       end_station = station
