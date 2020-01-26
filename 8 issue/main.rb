@@ -73,9 +73,10 @@ class Main
       station = Station.new(gets.chomp)
       initial_station = station
 
-
       puts 'Введите конечную станцию'
       station = Station.new(gets.chomp)
+      station.take_picture
+      station.record_video
       end_station = station
       route = Route.new(initial_station, end_station)
       puts "Путь со станциями #{route.station_list}  создан успешно."

@@ -29,7 +29,7 @@ class Station
     self.class.instance_methods
     self.register_instance
     validate!
-    valid?
+    #valid?
 
   end
 
@@ -41,51 +41,23 @@ class Station
     add_train_in_station
   end
 
-  def add_train_in_station
+  def add_train_in_station(&block)
     puts @@all_station
     @@all_station.each do |key, station|
       #  puts "все параметры класса #{station.methods} наименование станции -'#{key}'"
       #  puts "поезда на станции #{station.trains_at_station}"
-        station.trains_at_station.each do |key_number, value|
-          #if value == :trains_at_station
-          
-          # block  if value.class == PassengerTrain || value.class == CargoTrain
-
-           puts "найден !!! #{value.number}, #{value.type}, #{value.carriages.length}" if value.class == PassengerTrain
-           puts "найден !!! #{value.number}, #{value.type}, #{value.carriages.length}" if value.class == CargoTrain
-
-          
-          
-          # puts "найден !!! #{value.number}, #{value.type}, #{value.carriages.length}"
-          # number = value.number
-          # type = value.type
-          # carriages = value.carriages.length
-
-          # hj
-          # yield
-           #yield("#{value.number}", "#{value.type}", "#{value.carriages.length}")
-           #  block.call
-            end
-          # else
-          #  puts 'не найден метод'
-
-
-       # station.methods.each_pair {| key_value_array | block }
-
-       # puts value.inspect
-
+      station.trains_at_station.find_all do| obj |
+       puts "xc #{obj[1]}"
       end
-  end
-
-
-
-  def hj
-  #add_train_in_station do |number, type, carriages|
-  # puts do
-  #  "Номер поезда - #{number},тип - #{type}, кол-во вагонов - #{carriages}"
-  #  end
-  #  end
-  #block = proc { puts "найден !!! #{value.number}, #{value.type}, #{value.carriages.length}" }
+      station.trains_at_station.find_all do| obj |
+        puts "sdsd - #{obj[1].number}, #{obj[1].type} , #{obj[1].carriages.length}"
+        puts  number=obj[1].number
+        puts  type = obj[1].type
+        puts carriages=obj[1].carriages.length
+        my_method
+        yield(number, type, carriages)
+      end
+    end
   end
 
 
@@ -106,4 +78,11 @@ class Station
   def validate!
     station_validate
   end
+
+  def my_method
+    add_train_in_station do |number, type, carriages|
+    puts"найден hjhjhjhj!!! #{number}, #{type}, #{carriages}"
+    end
+  end
+
 end

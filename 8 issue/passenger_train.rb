@@ -12,4 +12,5 @@ class PassengerTrain < Train
     @type = 'passenger'
     register_instance
   end
+
 end

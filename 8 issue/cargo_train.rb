@@ -12,6 +12,7 @@ class CargoTrain < Train
     @type = 'cargo'
     register_instance
   end
+
 end
 
 
