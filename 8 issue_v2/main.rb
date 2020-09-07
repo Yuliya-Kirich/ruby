@@ -1,5 +1,10 @@
 # frozen_string_literal: true
+# При создании вагона указывать кол-во мест или общий объем, в зависимости от типа вагона
+# Выводить список вагонов у поезда (в указанном выше формате), используя созданные методы
+# Выводить список поездов на станции (в указанном выше формате), используя  созданные методы
+# Занимать место или объем в вагоне
 
+require_relative 'user_case/navigator.rb'
 require_relative 'train.rb'
 require_relative 'station.rb'
 require_relative 'route.rb'
@@ -20,46 +25,10 @@ require_relative 'user_case/adding_wagons'
 require_relative 'user_case/uncoupled_wagons'
 require_relative 'user_case/moving_train'
 require_relative 'user_case/train_station_connection'
+require_relative 'user_case/navigator'
+require_relative 'user_case/manager'
 
 
-# noinspection ALL
-class Main
-  user_input = nil
-  a= BotList.new
-  a.begin
-  while user_input != 0
-    a.bot
-    user_input = gets.to_i
-    if user_input == 1
-      StationInitiation.init
-
-    elsif user_input == 2
-      TrainTypeInitiation.init
-
-    elsif user_input == 3
-      RoutInitiation.init
-
-    elsif user_input == 4
-      TrainRouteInitiation.init
-
-    elsif user_input == 5
-      AddingWagons.init
-
-    elsif user_input == 6
-      UncoupledWagons.init
-
-    elsif user_input == 7
-      MovingTrain.init
-
-    elsif user_input == 8
-      TrainStationConnection.init
-
-    elsif user_input == 0
-      a.define_end
-
-    else
-      a.denger_limiting_input
-    end
-
-  end
+class Main < Navigator
+  Manager.new
 end

@@ -26,7 +26,7 @@ class BotList
     @end_station_bot = 'Введите конечную станцию'
     @add_station_bot = 'Хотите добавить станцию - нажмите 1; удалить станцию - нажмите 2; закончить процесс добавления - нажмите 0'
     @remote_station_name_bot = 'Введите наименование станции, которую хотите удалить'
-    @absence_station = 'Нет такой станции в составе пути'
+    @absence_station = 'Нет такой станции в составе пути, или вы пытаетесь удалить первую и последнюю станцию, что запрещено'
     @error_bot = 'Произошла ошибка'
     @wrong_train_type = 'Нельзя данному типу поезда добавить вагоны'
     @wrong_train_type_second ='Нельзя данному типу поезда удалить вагоны'
@@ -34,7 +34,11 @@ class BotList
     @viewing_station_list_bot = 'Если хотите просмотреть список станций - нажмите 1; список поездов на станции - нажмите 2; закончить процесс - нажмите 0'
     @end_bot = 'Программа завершена'
     @limiting_input = 'Введите значение из списка'
+    @quantify ='Введите общее количество мест в вагоне'
+    @book_a_seat = 'Если Вы хотите занять место в вагоне, нажмите 1'
+    @completed_landing = 'Если хотите завершить посадку, нажмите 0'
   end
+
   def begin
     puts @hello
   end
@@ -94,5 +98,14 @@ class BotList
   end
   def denger_limiting_input
     puts @limiting_input
+  end
+  def define_quantify
+    puts @quantify
+  end
+  def define_book_a_seat
+    puts @book_a_seat
+  end
+  def define_completed_landing
+    puts @completed_landing
   end
 end

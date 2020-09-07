@@ -12,7 +12,7 @@
 # При назначении маршрута поезду, поезд автоматически помещается на первую станцию в маршруте.
 # Может перемещаться между станциями, указанными в маршруте. Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # Возвращать предыдущую станцию, текущую, следующую, на основе маршрута
-#
+# Метод, который принимает блок и проходит по всем вагонам поезда (вагоны должны быть во внутреннем массиве), передавая каждый объект вагона в блок.
 #
 require_relative 'manufacture_name.rb'
 require_relative 'instance_counter.rb'
@@ -102,16 +102,30 @@ class Train
     else
       puts 'Дождитесь, когда поезд остановится'
     end
+
+    display_each_wagon do
+      @carriages.each_with_index do |wagon, key|
+        puts "Вагон №#{key+1} - #{wagon} "
+      end
+    end
   end
 
   def remove_carriage
     @carriages.clear if @carriages.length == 1
     @carriages.delete_at(1)
+    display_each_wagon do
+      @carriages.each_with_index do |wagon, key|
+        puts "Вагон №#{key+1} - #{wagon} "
+      end
+    end
   end
 
   def validate!
     train_validate
   end
 
-
+  def display_each_wagon
+    puts 'Все вагоны поезда: '
+    yield
+  end
 end

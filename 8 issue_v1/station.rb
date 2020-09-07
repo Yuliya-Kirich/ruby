@@ -8,6 +8,7 @@
 # Может отправлять поезда (по одному за раз, при этом, поезд удаляется из списка поездов, находящихся на станции).
 require_relative 'instance_counter.rb'
 require_relative 'validate.rb'
+require_relative 'user_case/train_type_initiation'
 
 class Station
   include InstanceCounter
@@ -24,7 +25,7 @@ class Station
 
   def initialize(name)
     @name = name
-    @trains_at_station = {}
+    @trains_at_station = []
     @@all_station[name] = self
     self.class.instance_methods
     self.register_instance
@@ -47,26 +48,41 @@ class Station
       #  puts "все параметры класса #{station.methods} наименование станции -'#{key}'"
       #  puts "поезда на станции #{station.trains_at_station}"
       station.trains_at_station.find_all do| obj |
-       puts "xc #{obj[1]}"
+        # puts "xc #{obj[1]}"
+        # each obj {|tool| puts tool
+        # puts tool.number
+        # puts tool.type}
+       puts obj
+        #puts obj{1}.number.type.carriages.length
       end
-      station.trains_at_station.find_all do| obj |
-        puts "sdsd - #{obj[1].number}, #{obj[1].type} , #{obj[1].carriages.length}"
-        puts  number=obj[1].number
-        puts  type = obj[1].type
-        puts carriages=obj[1].carriages.length
-        my_method
-        yield(number, type, carriages)
-      end
+      #station.trains_at_station.find_all do| obj |
+      #  puts "sdsd - #{obj[1].number}, #{obj[1].type} , #{obj[1].carriages.length}"
+      #  puts  number=obj[1].number
+      # puts  type = obj[1].type
+      # puts carriages=obj[1].carriages.length
+      #  my_method
+      #  yield(number, type, carriages)
+      # end
     end
   end
 
 
   def show_trains
-    @trains_at_station.each do |train|
-      puts "поезд на станции #{train.number}"
+    as=0
+    @trains_at_station.each do |x|
+      product = eval(x.to_s)
+      puts product if (product.instance_of?Train) & (product.instance_of?Station)
+
+      #puts as.number if train == PassengerTrain
+
+      #puts  "поезд #{train} на станции #{Station}"
+
+      #if Train.object_id != nil?
+      #puts "поезд на станции  #{train}"
+      # end
+      # puts "поезд на станции #{Station.name} :  #{train}"
     end
    end
-
   def show_type_train(train_type)
     @trains_at_station.select { |train| train.type == train_type }.size
   end
@@ -81,7 +97,7 @@ class Station
 
   def my_method
     add_train_in_station do |number, type, carriages|
-    puts"найден hjhjhjhj!!! #{number}, #{type}, #{carriages}"
+    puts "найден hjhjhjhj!!! #{number}, #{type}, #{carriages}"
     end
   end
 
