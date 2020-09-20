@@ -21,7 +21,7 @@ class TrainRouteInitiation < TrainTypeInitiation
       puts "Путь поезду назначен: текущая станция #{@@cargo_train.current_station.name} "
     else
       a = BotList.new
-      a.bot(:error_bot)
+      a.bot :error_bot
     end
   end
 end

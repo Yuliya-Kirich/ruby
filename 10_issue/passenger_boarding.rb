@@ -21,8 +21,8 @@ module Passenger_boarding
       seats = @number_of_seats.length
       take = nil
       while take != 0
-        a.bot(:book_a_seat)
-        a.bot(:completed_landing)
+        a.bot :book_a_seat
+        a.bot :completed_landing
         take = gets.chomp.to_i
         case take
         when 1

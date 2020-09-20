@@ -11,7 +11,7 @@ class TrainStationConnection< TrainTypeInitiation
     remove = nil
 
     while remove != 0
-      a.bot(:viewing_station_list_bot)
+      a.bot :viewing_station_list_bot
       remove = gets.to_i
 
       case remove
@@ -25,7 +25,7 @@ class TrainStationConnection< TrainTypeInitiation
           elsif @@train_type == 2
             puts @@cargo_train.current_station.set_trains_each_station
           else
-            a.bot(:error_bot)
+            a.bot :error_bot
           end
         end
       end

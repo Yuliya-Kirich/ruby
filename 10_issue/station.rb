@@ -18,16 +18,12 @@ require_relative 'manager/validation'
 
 class Station
   include InstanceCounter
-  # include Validate
-  #extend Acсessors
-  #include Acсessors
+  extend Acсessors
+  include Acсessors
   include Validation
 
-  #attr_accessor_with_history :daily, :holidays, :reserve, :name_non
-
-
-
-  attr_reader :name, :trains_at_station
+  attr_accessor_with_history :daily, :holidays, :reserve, :name_non
+  attr_accessor :name, :trains_at_station
   @@all_station = {}
 
   class << self
@@ -41,25 +37,20 @@ class Station
     @trains_at_station = []
     @@all_station[name] = self
     self.class.instance_methods
-    self.register_instance
-
-    #validate!
-
+    register_instance
+    validate!
+    validate @name, :presence
+    validate @name, :format, /[A-Z]/
+    validate @name, :type, String
   end
-  validate :name, :presence
-  validate 123, formats, &/A-Z/
-  validate 123, type, &String
-
 
   def add_train(train)
     @trains_at_station << train
-    #Поезд можно добавить на станцию, только через привязку пути.
+    # Поезд можно добавить на станцию, только через привязку пути.
     viewing_train_in_station do
       puts "Номер поезда - #{train.number},тип - #{train.type}, кол-во вагонов - #{train.carriages.length}"
     end
-
   end
-
 
   def viewing_train_in_station
     if trains_at_station.length.positive?
@@ -71,7 +62,7 @@ class Station
   end
 
   def set_trains_each_station
-    @@all_station.each do |key, value|
+    @@all_station.each do |_key, value|
       if value.trains_at_station.length.positive?
         puts "На платформах станции #{value.name} следующие поезда: "
         value.trains_at_station.each do |value_train|
@@ -92,8 +83,4 @@ class Station
   def delete_train(train)
     @trains_at_station.delete(train)
   end
-
-  # def validate!
-  # station_validate
-  #end
 end

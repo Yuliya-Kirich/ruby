@@ -47,14 +47,14 @@ class BotList
   end
 
   def bot_one
-    bot(:first)
-    bot(:second)
-    bot(:third)
-    bot(:fourth)
-    bot(:fifth)
-    bot(:sixth)
-    bot(:seventh)
-    bot(:eigth)
-    bot(:zero)
+    bot :first
+    bot :second
+    bot :third
+    bot :fourth
+    bot :fifth
+    bot :sixth
+    bot :seventh
+    bot :eigth
+    bot :zero
   end
 end

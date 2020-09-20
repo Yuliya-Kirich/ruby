@@ -11,7 +11,7 @@ class Manager
   def new_process
     while user_input != 0
       a = BotList.new
-      a.bot(:hello)
+      a.bot :hello
       a.bot_one
       @user_input = gets.to_i
       Navigator.navigator(user_input)

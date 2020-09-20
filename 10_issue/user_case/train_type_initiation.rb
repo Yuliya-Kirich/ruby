@@ -16,16 +16,16 @@ class TrainTypeInitiation < RoutInitiation
   end
   def self.init
     a = BotList.new
-    a.bot(:train_type_bot)
+    a.bot :train_type_bot
     @@train_type = gets.to_i
-    a.bot(:train_number_bot)
+    a.bot :train_number_bot
     train_number = gets.chomp
     if @@train_type == 1
       passenger_train = PassengerTrain.new(train_number)
       @@passenger_train = passenger_train
       Train.find(train_number)
       puts "Пассажирский поезд под номером \"#{passenger_train.number}\" создан успешно."
-      a.bot(:train_carriage_seats_bot)
+      a.bot :train_carriage_seats_bot
       number_of_seats = gets.chomp.to_i
       @@passenger_carriage = PassengerCarriage.new(number_of_seats)
     elsif @@train_type == 2
@@ -36,7 +36,7 @@ class TrainTypeInitiation < RoutInitiation
       overall_volume = gets.chomp.to_i
       @@cargo_carriage = CargoCarriage.new(overall_volume)
     else
-      a.bot(:denger_type_train_bot)
+      a.bot :denger_type_train_bot
     end
   end
 end

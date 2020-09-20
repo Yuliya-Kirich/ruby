@@ -15,7 +15,7 @@ class AddingWagons < TrainTypeInitiation
       @@cargo_train.add_carriages(@@cargo_carriage)
       puts "Вагон грузовому поезду добавлен #{@@cargo_train.carriages.count}"
     else
-      BotList.new.bot(:wrong_train_type)
+      BotList.new.bot :wrong_train_type
     end
   end
 end

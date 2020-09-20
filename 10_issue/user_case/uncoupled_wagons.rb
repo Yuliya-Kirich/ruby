@@ -11,7 +11,7 @@ class UncoupledWagons < TrainTypeInitiation
       @@cargo_train.remove_carriage
       puts "Вагоны грузовому поезду удалены #{@@cargo_train.carriages.count}"
     else
-      a.bot(:wrong_train_type_second)
+      a.bot :wrong_train_type_second
     end
   end
 end

@@ -28,10 +28,10 @@ class Navigator
       TrainStationConnection.init
 
     elsif user_input == 0
-      a.bot(:end_operation)
+      a.bot :end_operation
 
     else
-      a.bot(:limiting_input)
+      a.bot :limiting_input
     end
   end
 end
